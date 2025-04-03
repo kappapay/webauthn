@@ -12,6 +12,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+This file has been modified KappaPay
 */
 
 package webauthn
@@ -41,7 +44,8 @@ func (b *bufferString) UnmarshalJSON(data []byte) (err error) {
 	if data[len(data)-1] != '"' {
 		return errors.New("json: illegal data at input byte " + strconv.Itoa(len(data)-1))
 	}
-	*b, err = base64.RawURLEncoding.DecodeString(string(data[1 : len(data)-1]))
+	// This change is critical as the Stytch User ID field can be sent with padding which causes RawURLEncoding to error
+	*b, err = base64.URLEncoding.DecodeString(string(data[1 : len(data)-1]))
 	return err
 }
 
