@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-This file has been modified KappaPay
+Modified by Kappa
 */
 
 package webauthn
@@ -22,6 +22,7 @@ package webauthn
 import (
 	"encoding/base64"
 	"errors"
+	"fmt"
 	"strconv"
 )
 
@@ -44,9 +45,24 @@ func (b *bufferString) UnmarshalJSON(data []byte) (err error) {
 	if data[len(data)-1] != '"' {
 		return errors.New("json: illegal data at input byte " + strconv.Itoa(len(data)-1))
 	}
-	// This change is critical as the Stytch User ID field can be sent with padding which causes RawURLEncoding to error
-	*b, err = base64.URLEncoding.DecodeString(string(data[1 : len(data)-1]))
-	return err
+
+	// Fields can have different base64 encoding types so we need to try them all
+	decoders := [4]func(s string) ([]byte, error){
+		base64.URLEncoding.DecodeString,
+		base64.RawURLEncoding.DecodeString,
+		base64.StdEncoding.DecodeString,
+		base64.RawStdEncoding.DecodeString,
+	}
+	mErr := make([]error, 0, len(decoders))
+	for _, decoder := range decoders {
+		*b, err = decoder(string(data[1 : len(data)-1]))
+		if err != nil {
+			mErr = append(mErr, err)
+			continue
+		}
+		return err
+	}
+	return fmt.Errorf("exhausted base64 decoding options, got errors: %v", mErr)
 }
 
 // PublicKeyCredentialRpEntity represents the Web Authentication structure of the same name,
