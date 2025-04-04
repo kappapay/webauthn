@@ -12,6 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Modified by Kappa
 */
 
 package androidsafetynet
@@ -26,7 +28,7 @@ import (
 	"fmt"
 
 	"github.com/fxamacker/cbor/v2"
-	"github.com/fxamacker/webauthn"
+	"github.com/kappapay/webauthn"
 )
 
 // Google GlobalSign Root CA R2, converted from https://pki/goog/gsr2/GSR2.crt.

@@ -12,6 +12,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+Modified by Kappa
 */
 
 package tpm
@@ -30,7 +33,7 @@ import (
 	"io"
 
 	"github.com/fxamacker/cbor/v2"
-	"github.com/fxamacker/webauthn"
+	"github.com/kappapay/webauthn"
 )
 
 var (
@@ -669,7 +672,7 @@ func verifyAttestationCert(attestnCert *x509.Certificate, caCerts []*x509.Certif
 var tpmAlgorithms = map[int]string{
 	0x0000: "TPM_ALG_ERROR",
 	0x0001: "TPM_ALG_RSA",
-	//0x0004: "TPM_ALG_SHA",
+	// 0x0004: "TPM_ALG_SHA",
 	0x0004: "TPM_ALG_SHA1",
 	0x0005: "TPM_ALG_HMAC",
 	0x0006: "TPM_ALG_AES",
@@ -719,7 +722,7 @@ var tpmECCCurve = map[int]string{
 
 var tpmStructureTags = map[int]string{
 	0x00C4: "TPM_ST_RSP_COMMAND",
-	0X8000: "TPM_ST_NULL",
+	0x8000: "TPM_ST_NULL",
 	0x8001: "TPM_ST_NO_SESSIONS",
 	0x8002: "TPM_ST_SESSIONS",
 	0x8014: "TPM_ST_ATTEST_NV",

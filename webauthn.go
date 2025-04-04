@@ -12,6 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Modified by Kappa
 */
 
 /*
@@ -26,7 +28,7 @@ It doesn't import unreliable packages. It uses fxamacker/cbor because it doesn't
 crash and it's the most well-tested CBOR library available (v1.5 has 375+ tests
 and passed 3+ billion execs in coverage-guided fuzzing).
 
-A demo webapp (https://www.github.com/fxamacker/webauthn-demo) shows how to use
+A demo webapp (https://www.github.com/kappapay/webauthn-demo) shows how to use
 this package with a security token like the YubiKey.
 */
 package webauthn
